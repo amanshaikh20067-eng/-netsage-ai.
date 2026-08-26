@@ -2,7 +2,7 @@
 
 AI-assisted troubleshooting helper for Cisco Packet Tracer labs.
 
-This repository currently contains **milestones M0–M4** (setup, models, dataset, deterministic rules, and rule-engine tests).
+This repository currently contains **milestones M0–M5** (through the OpenAI diagnosis service).
 
 ## Requirements
 
@@ -43,6 +43,12 @@ Troubleshooting cases live in `data/cases.json` (30 cases covering VLAN, gateway
 ## Rule engine (M3)
 
 `rules.engine.run_rules()` runs six independent checks: duplicate IP, wrong subnet mask, gateway mismatch, interface down, missing VLAN, and missing route. Findings use `detected`, `not_detected`, or `insufficient_evidence`. The engine does not call OpenAI.
+
+## AI diagnosis service (M5)
+
+`ai.diagnosis.DiagnosisService` sends symptom, topology notes, show output, and Python findings to OpenAI. It returns raw text only. Invalid or failed API responses are errors; the service does not invent a fallback diagnosis. Schema validation is not applied yet (M6).
+
+Optional environment variables: `OPENAI_MODEL` (default `gpt-4o-mini`), `OPENAI_TIMEOUT_SECONDS` (default `30`).
 
 ## Tests
 
