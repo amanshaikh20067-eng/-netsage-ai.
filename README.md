@@ -2,7 +2,7 @@
 
 AI-assisted troubleshooting helper for Cisco Packet Tracer labs.
 
-This repository currently contains **milestones M0–M2** (project setup, data models, and the case dataset).
+This repository currently contains **milestones M0–M3** (setup, models, dataset, and the deterministic rule engine).
 
 ## Requirements
 
@@ -39,6 +39,10 @@ Pydantic models in `models/` define the core entities: `Case`, `AIDiagnosis`, `P
 ## Dataset (M2)
 
 Troubleshooting cases live in `data/cases.json` (30 cases covering VLAN, gateway, DHCP, DNS, routing, ACL, NAT, and wireless). `core.dataset_loader.load_cases()` validates every record. `runtime_input()` returns only symptom, topology notes, and show output so expected answers are not sent to the AI.
+
+## Rule engine (M3)
+
+`rules.engine.run_rules()` runs six independent checks: duplicate IP, wrong subnet mask, gateway mismatch, interface down, missing VLAN, and missing route. Findings use `detected`, `not_detected`, or `insufficient_evidence`. The engine does not call OpenAI.
 
 ## Tests
 

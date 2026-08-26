@@ -24,3 +24,7 @@ class PythonFinding(BaseModel):
     rule_id: RuleId
     status: RuleStatus
     evidence: list[str] = Field(default_factory=list)
+
+
+class RuleEngineResult(BaseModel):
+    findings: list[PythonFinding]

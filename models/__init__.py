@@ -14,7 +14,7 @@ from models.diagnosis import (
     NextCommand,
 )
 from models.review import HumanReview, ReviewDecision
-from models.rules import PythonFinding, RuleId, RuleStatus
+from models.rules import PythonFinding, RuleEngineResult, RuleId, RuleStatus
 from models.verification import Verification, VerificationStatus
 
 __all__ = [
@@ -29,6 +29,7 @@ __all__ = [
     "IssueType",
     "NextCommand",
     "PythonFinding",
+    "RuleEngineResult",
     "ReviewDecision",
     "RuleId",
     "RuleStatus",
