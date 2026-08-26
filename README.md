@@ -2,7 +2,7 @@
 
 AI-assisted troubleshooting helper for Cisco Packet Tracer labs.
 
-This repository currently contains **milestone M0** (project setup) only.
+This repository currently contains **milestones M0–M1** (project setup and data models).
 
 ## Requirements
 
@@ -31,6 +31,10 @@ Expected startup message:
 NetSage AI
 System initialized.
 ```
+
+## Data models (M1)
+
+Pydantic models in `models/` define the core entities: `Case`, `AIDiagnosis`, `PythonFinding`, `ComparisonResult`, `HumanReview`, and `Verification`. They validate allowed issue types, severity, review decisions, comparison states, verification states, and confidence (0–100). Models contain no networking or diagnosis logic.
 
 ## Tests
 
