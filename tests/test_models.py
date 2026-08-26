@@ -61,6 +61,7 @@ def _valid_diagnosis_payload() -> dict:
 
 def test_valid_case_creation() -> None:
     case = Case.model_validate(_valid_case_payload())
+
     assert case.case_id == "CASE-001"
     assert case.issue_type == IssueType.VLAN
     assert case.severity == Severity.MEDIUM
@@ -69,6 +70,7 @@ def test_valid_case_creation() -> None:
 def test_invalid_issue_type() -> None:
     payload = _valid_case_payload()
     payload["issue_type"] = "SWITCH"
+
     with pytest.raises(ValidationError):
         Case.model_validate(payload)
 
@@ -76,6 +78,7 @@ def test_invalid_issue_type() -> None:
 def test_invalid_severity() -> None:
     payload = _valid_case_payload()
     payload["severity"] = "critical"
+
     with pytest.raises(ValidationError):
         Case.model_validate(payload)
 
@@ -87,6 +90,7 @@ def test_invalid_review_decision() -> None:
                 "review_id": "REV-001",
                 "case_id": "CASE-001",
                 "human_decision": "ignore",
+                "ai_diagnosis": _valid_diagnosis_payload(),
                 "human_final_diagnosis": None,
                 "review_comment": "",
             }
@@ -96,6 +100,7 @@ def test_invalid_review_decision() -> None:
 def test_confidence_below_zero() -> None:
     payload = _valid_diagnosis_payload()
     payload["diagnosis"]["confidence"] = -1
+
     with pytest.raises(ValidationError):
         AIDiagnosis.model_validate(payload)
 
@@ -103,12 +108,14 @@ def test_confidence_below_zero() -> None:
 def test_confidence_above_100() -> None:
     payload = _valid_diagnosis_payload()
     payload["diagnosis"]["confidence"] = 101
+
     with pytest.raises(ValidationError):
         AIDiagnosis.model_validate(payload)
 
 
 def test_valid_ai_diagnosis() -> None:
     diagnosis = AIDiagnosis.model_validate(_valid_diagnosis_payload())
+
     assert diagnosis.diagnosis.confidence == 85
     assert diagnosis.diagnosis.issue_type == IssueType.VLAN
     assert diagnosis.next_command.command == "show vlan brief"
@@ -117,6 +124,7 @@ def test_valid_ai_diagnosis() -> None:
 def test_invalid_ai_diagnosis() -> None:
     payload = _valid_diagnosis_payload()
     del payload["diagnosis"]["root_cause"]
+
     with pytest.raises(ValidationError):
         AIDiagnosis.model_validate(payload)
 
@@ -128,6 +136,7 @@ def test_valid_comparison() -> None:
             "reason": "Both identify missing VLAN 20.",
         }
     )
+
     assert result.status == ComparisonStatus.AGREEMENT
 
 
@@ -137,11 +146,14 @@ def test_valid_review() -> None:
             "review_id": "REV-001",
             "case_id": "CASE-001",
             "human_decision": "accepted",
+            "ai_diagnosis": _valid_diagnosis_payload(),
             "human_final_diagnosis": _valid_diagnosis_payload(),
             "review_comment": "Agrees with the AI diagnosis.",
         }
     )
+
     assert review.human_decision == ReviewDecision.ACCEPTED
+    assert review.ai_diagnosis is not None
     assert review.human_final_diagnosis is not None
 
 
@@ -152,19 +164,24 @@ def test_valid_verification() -> None:
             "evidence": "ping 192.168.10.20 succeeded",
         }
     )
+
     assert verification.status == VerificationStatus.VERIFIED
 
 
 def test_case_json_round_trip() -> None:
     case = Case.model_validate(_valid_case_payload())
+
     restored = Case.model_validate_json(case.model_dump_json())
+
     assert restored == case
 
 
 def test_ai_diagnosis_json_round_trip() -> None:
     diagnosis = AIDiagnosis.model_validate(_valid_diagnosis_payload())
+
     as_json = json.loads(diagnosis.model_dump_json())
     restored = AIDiagnosis.model_validate(as_json)
+
     assert restored == diagnosis
 
 
@@ -176,13 +193,19 @@ def test_python_finding_model() -> None:
             "evidence": ["VLAN 20 referenced in topology notes"],
         }
     )
+
     assert finding.rule_id == RuleId.MISSING_VLAN
     assert finding.status == RuleStatus.DETECTED
 
 
 def test_invalid_comparison_status() -> None:
     with pytest.raises(ValidationError):
-        ComparisonResult.model_validate({"status": "MAYBE", "reason": "n/a"})
+        ComparisonResult.model_validate(
+            {
+                "status": "MAYBE",
+                "reason": "n/a",
+            }
+        )
 
 
 def test_confidence_boundary_values() -> None:
@@ -196,15 +219,25 @@ def test_confidence_boundary_values() -> None:
                 "severity": "high",
             }
         )
+
         assert details.confidence == value
 
 
 def test_evidence_item_and_next_command_types() -> None:
     item = EvidenceItem.model_validate(
-        {"source": "show_output", "observation": "Gi0/1 is administratively down"}
+        {
+            "source": "show_output",
+            "observation": "Gi0/1 is administratively down",
+        }
     )
+
     assert item.source == EvidenceSource.SHOW_OUTPUT
+
     command = NextCommand.model_validate(
-        {"command": "show ip interface brief", "purpose": "Check interface state"}
+        {
+            "command": "show ip interface brief",
+            "purpose": "Check interface state",
+        }
     )
+
     assert command.command.startswith("show")
