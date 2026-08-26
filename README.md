@@ -2,7 +2,7 @@
 
 AI-assisted troubleshooting helper for Cisco Packet Tracer labs.
 
-This repository currently contains **milestones M0–M3** (setup, models, dataset, and the deterministic rule engine).
+This repository currently contains **milestones M0–M4** (setup, models, dataset, deterministic rules, and rule-engine tests).
 
 ## Requirements
 

@@ -61,12 +61,18 @@ class HostRecord:
     source: str = ""
 
 
+def as_text(value: object) -> str:
+    return value if isinstance(value, str) else ""
+
+
 def ip_to_int(ip: str) -> int:
     parts = [int(item) for item in ip.split(".")]
     return (parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]
 
 
 def cidr_to_mask(prefix: int) -> str:
+    if prefix < 0 or prefix > 32:
+        raise ValueError(f"CIDR prefix must be 0-32, got {prefix}")
     bits = (0xFFFFFFFF << (32 - prefix)) & 0xFFFFFFFF
     return ".".join(str((bits >> shift) & 0xFF) for shift in (24, 16, 8, 0))
 
@@ -88,6 +94,9 @@ def combined_text(symptom: str, topology_notes: str, show_output: str) -> str:
 
 
 def parse_host_records(symptom: str, topology_notes: str, show_output: str) -> list[HostRecord]:
+    symptom = as_text(symptom)
+    topology_notes = as_text(topology_notes)
+    show_output = as_text(show_output)
     records: list[HostRecord] = []
     records.extend(_parse_ipconfig_blocks(show_output))
     records.extend(_parse_interface_brief_ips(show_output))
@@ -199,7 +208,12 @@ def _parse_named_assignments(text: str) -> list[HostRecord]:
         if name.lower() in SKIP_NAMES:
             continue
         prefix = match.group(3)
-        mask = cidr_to_mask(int(prefix)) if prefix else None
+        mask = None
+        if prefix is not None:
+            prefix_int = int(prefix)
+            if prefix_int > 32:
+                continue
+            mask = cidr_to_mask(prefix_int)
         records.append(
             HostRecord(
                 name=name,
@@ -212,6 +226,7 @@ def _parse_named_assignments(text: str) -> list[HostRecord]:
 
 
 def documented_gateway(topology_notes: str) -> str | None:
+    topology_notes = as_text(topology_notes)
     patterns = [
         r"gateway should be[^\n]*?(\d+\.\d+\.\d+\.\d+)",
         r"correct gateway is[^\n]*?(\d+\.\d+\.\d+\.\d+)",
@@ -231,6 +246,7 @@ def documented_gateway(topology_notes: str) -> str | None:
 
 def documented_masks(topology_notes: str) -> list[tuple[str, str]]:
     """Return (ip, mask) pairs that topology states explicitly."""
+    topology_notes = as_text(topology_notes)
     pairs: list[tuple[str, str]] = []
     for match in CIDR.finditer(topology_notes):
         pairs.append((match.group(1), cidr_to_mask(int(match.group(2)))))
@@ -246,6 +262,7 @@ def documented_masks(topology_notes: str) -> list[tuple[str, str]]:
 
 
 def parse_vlan_brief_ids(show_output: str) -> set[int] | None:
+    show_output = as_text(show_output)
     lower = show_output.lower()
     if "show vlan brief" not in lower and "vlan name" not in lower:
         return None
@@ -269,6 +286,8 @@ def parse_vlan_brief_ids(show_output: str) -> set[int] | None:
 
 
 def referenced_vlan_ids(topology_notes: str, show_output: str) -> set[int]:
+    topology_notes = as_text(topology_notes)
+    show_output = as_text(show_output)
     found: set[int] = set()
     for match in VLAN_ID.finditer(topology_notes):
         found.add(int(match.group(1)))
@@ -283,6 +302,7 @@ def referenced_vlan_ids(topology_notes: str, show_output: str) -> set[int]:
 
 
 def parse_route_prefixes(show_output: str) -> list[tuple[str, int]] | None:
+    show_output = as_text(show_output)
     lower = show_output.lower()
     if "show ip route" not in lower:
         return None
@@ -315,6 +335,7 @@ def parse_route_prefixes(show_output: str) -> list[tuple[str, int]] | None:
 
 
 def required_route_prefixes(topology_notes: str) -> list[tuple[str, int]]:
+    topology_notes = as_text(topology_notes)
     required: list[tuple[str, int]] = []
     if re.search(r"\bdefault route\b", topology_notes, re.IGNORECASE):
         required.append(("0.0.0.0", 0))

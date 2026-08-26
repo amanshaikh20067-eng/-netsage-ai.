@@ -22,6 +22,7 @@ BRIEF_ROW = re.compile(
 
 
 def evaluate(symptom: str, topology_notes: str, show_output: str) -> PythonFinding:
+    show_output = show_output if isinstance(show_output, str) else ""
     down: list[str] = []
     seen_state = False
 
