@@ -1,4 +1,4 @@
-"""Deterministic networking rules package."""
+﻿"""Deterministic networking rules package."""
 
 from rules.engine import run_rules
 

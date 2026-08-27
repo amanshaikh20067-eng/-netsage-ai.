@@ -1,5 +1,4 @@
-"""Deterministic rule engine. Does not call OpenAI or use AI results."""
-
+﻿"""Deterministic rule engine. Does not call OpenAI or use AI results."""
 from __future__ import annotations
 
 from models.rules import PythonFinding, RuleEngineResult
