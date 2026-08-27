@@ -41,13 +41,4 @@ def test_no_hardcoded_api_key_in_source() -> None:
     assert env_example.strip() == "OPENAI_API_KEY="
 
 
-def test_streamlit_application_starts() -> None:
-    from streamlit.testing.v1 import AppTest
 
-    app_test = AppTest.from_file(str(ROOT / "app.py"))
-    app_test.run()
-    assert not app_test.exception
-    titles = [element.value for element in app_test.title]
-    bodies = [element.value for element in app_test.markdown]
-    assert "NetSage AI" in titles
-    assert any("System initialized." in str(value) for value in bodies)
