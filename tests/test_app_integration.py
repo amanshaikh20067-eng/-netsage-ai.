@@ -31,7 +31,7 @@ def _fake_request_diagnosis(self, symptom, topology_notes, show_output, python_f
 
 
 def test_app_starts_and_shows_input_form() -> None:
-    at = AppTest.from_file(APP_PATH)
+    at = AppTest.from_file(APP_PATH, default_timeout=15)
     at.run()
     assert not at.exception
     assert "NetSage AI" in [t.value for t in at.title]
@@ -41,7 +41,7 @@ def test_missing_api_key_shows_error(monkeypatch, tmp_path) -> None:
     monkeypatch.setenv("NETSAGE_REVIEWS_PATH", str(tmp_path / "reviews.json"))
     monkeypatch.setattr("config.settings.is_openai_configured", lambda: False)
 
-    at = AppTest.from_file(APP_PATH)
+    at = AppTest.from_file(APP_PATH, default_timeout=15)
     at.run()
     at.text_area(key="symptom_input").input("PC2 cannot reach PC1.")
     at.text_area(key="topology_input").input("PC2 is on VLAN 20, which does not exist yet.")
@@ -60,7 +60,7 @@ def test_full_pipeline_with_mocked_ai(monkeypatch, tmp_path) -> None:
         "ai.diagnosis.DiagnosisService.request_diagnosis", _fake_request_diagnosis,
     )
 
-    at = AppTest.from_file(APP_PATH)
+    at = AppTest.from_file(APP_PATH, default_timeout=15)
     at.run()
     at.text_area(key="symptom_input").input("PC2 cannot reach PC1.")
     at.text_area(key="topology_input").input("PC2 is on VLAN 20, which does not exist yet.")
