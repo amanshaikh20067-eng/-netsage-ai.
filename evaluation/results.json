@@ -1,0 +1,1894 @@
+[
+  {
+    "case_id": "CASE-001",
+    "expected_issue_type": "VLAN",
+    "expected_root_cause": "VLAN 20 does not exist, and PC2's access port Fa0/2 remains in VLAN 1 instead of VLAN 20.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "detected",
+        "evidence": [
+          "VLAN 20 is referenced in topology or configuration but is absent from VLAN evidence.",
+          "VLANs present in evidence: 1, 10."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-002",
+    "expected_issue_type": "VLAN",
+    "expected_root_cause": "The printer port Fa0/8 is still an access port in VLAN 1 instead of VLAN 30.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "not_detected",
+        "evidence": [
+          "Referenced VLANs are present: 30."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-003",
+    "expected_issue_type": "VLAN",
+    "expected_root_cause": "SwitchA's trunk Gi0/1 does not allow VLAN 40, so VLAN 40 traffic is not forwarded to SwitchB.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-004",
+    "expected_issue_type": "VLAN",
+    "expected_root_cause": "Native VLAN mismatch: Switch1 native VLAN is 1 while Switch2 native VLAN is 99.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-005",
+    "expected_issue_type": "GATEWAY",
+    "expected_root_cause": "PC1's default gateway 192.168.20.1 is not in PC1's 192.168.10.0/24 subnet.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "PC1 gateway 192.168.20.1 is outside subnet 192.168.10.10/255.255.255.0.",
+          "PC1 gateway 192.168.20.1 conflicts with documented gateway 192.168.10.1."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-006",
+    "expected_issue_type": "GATEWAY",
+    "expected_root_cause": "The PC default gateway is 10.10.10.254 (a printer) instead of the documented router address 10.10.10.1.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "PC gateway 10.10.10.254 conflicts with documented gateway 10.10.10.1."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-007",
+    "expected_issue_type": "GATEWAY",
+    "expected_root_cause": "PC-Lab has no default gateway configured (0.0.0.0).",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "PC-Lab has no usable default gateway (0.0.0.0)."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-008",
+    "expected_issue_type": "GATEWAY",
+    "expected_root_cause": "H1's default gateway 192.168.1.62 is not the documented router address 192.168.1.1 (it is the subnet broadcast/last address region rather than the router).",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "H1 gateway 192.168.1.62 conflicts with documented gateway 192.168.1.1."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-009",
+    "expected_issue_type": "DHCP",
+    "expected_root_cause": "The DHCP pool network is 192.168.15.0/24, which does not match the client interface subnet 192.168.50.0/24.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "PC-DHCP has no usable default gateway (0.0.0.0)."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-010",
+    "expected_issue_type": "DHCP",
+    "expected_root_cause": "Router-BR G0/1 has no ip helper-address, so DHCP broadcasts are not forwarded to 10.1.1.10.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "PC-Branch has no usable default gateway (0.0.0.0)."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-011",
+    "expected_issue_type": "DHCP",
+    "expected_root_cause": "All addresses in 192.168.8.0/24 are excluded, so the DHCP pool has no assignable addresses.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "PC-New has no usable default gateway (0.0.0.0)."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-012",
+    "expected_issue_type": "DHCP",
+    "expected_root_cause": "DHCP default-router is 192.168.30.254, which does not match the actual router interface 192.168.30.1.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "not_detected",
+        "evidence": [
+          "Multiple IP assignments were present and no address was shared by more than one device or interface."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "not_detected",
+        "evidence": [
+          "Host default gateway is in the local subnet and does not conflict with documented topology."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-013",
+    "expected_issue_type": "DNS",
+    "expected_root_cause": "PC1 is configured to use DNS server 192.168.10.2 instead of the actual DNS server 192.168.10.50.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "detected",
+        "evidence": [
+          "IPv4, PC1 use 192.168.10.10"
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "not_detected",
+        "evidence": [
+          "Host default gateway is in the local subnet and does not conflict with documented topology."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": false,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-014",
+    "expected_issue_type": "DNS",
+    "expected_root_cause": "DNS lookup is disabled on R1 (no ip domain-lookup) and no name-server is configured.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-015",
+    "expected_issue_type": "DNS",
+    "expected_root_cause": "The DNS zone is missing an A record for files.company.local pointing to 10.0.0.20.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-016",
+    "expected_issue_type": "DNS",
+    "expected_root_cause": "PC1 DNS suffix is branch.local instead of hq.local, so the short name server does not expand to server.hq.local.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "not_detected",
+        "evidence": [
+          "Host default gateway is in the local subnet and does not conflict with documented topology."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-017",
+    "expected_issue_type": "ROUTING",
+    "expected_root_cause": "RouterA has no route to 192.168.2.0/24.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Topology documents a gateway, but no host gateway configuration was supplied."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No required destination network was stated in the supplied topology notes."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-018",
+    "expected_issue_type": "ROUTING",
+    "expected_root_cause": "HQ-RTR static route to 172.16.20.0/24 uses next hop 10.10.10.1 (itself) instead of 10.10.10.2.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Topology documents a gateway, but no host gateway configuration was supplied."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "not_detected",
+        "evidence": [
+          "Each required destination network appears in the supplied routing evidence."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-019",
+    "expected_issue_type": "ROUTING",
+    "expected_root_cause": "R1 RIP is not advertising 192.168.10.0; only 192.168.12.0 is listed under Routing for Networks.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Topology documents a gateway, but no host gateway configuration was supplied."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No required destination network was stated in the supplied topology notes."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-020",
+    "expected_issue_type": "ROUTING",
+    "expected_root_cause": "Edge-RTR has no default route (0.0.0.0/0) toward the ISP.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "detected",
+        "evidence": [
+          "Required destination 0.0.0.0/0 has no corresponding route in the supplied table."
+        ]
+      }
+    ],
+    "python_correct": true,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-021",
+    "expected_issue_type": "ACL",
+    "expected_root_cause": "ACL 110 inbound on the outside interface denies TCP port 80, blocking HTTP while ICMP is still permitted.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-022",
+    "expected_issue_type": "ACL",
+    "expected_root_cause": "ACL 10 only permits the single host 192.168.5.0 (wildcard 0.0.0.0), so LAN hosts are implicitly denied.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-023",
+    "expected_issue_type": "ACL",
+    "expected_root_cause": "ACL 120 denies 192.168.4.0/24 instead of guest network 192.168.40.0/24, so guest traffic never matches the deny.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-024",
+    "expected_issue_type": "ACL",
+    "expected_root_cause": "ACL 130 is applied outbound on G0/0, so it does not filter Telnet traffic arriving inbound to the router.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "not_detected",
+        "evidence": [
+          "Configured masks match the masks documented in the supplied topology notes."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "not_detected",
+        "evidence": [
+          "All interfaces with explicit state information are up."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-025",
+    "expected_issue_type": "NAT",
+    "expected_root_cause": "NAT inside/outside are reversed: G0/0 is marked outside and G0/1 is marked inside.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-026",
+    "expected_issue_type": "NAT",
+    "expected_root_cause": "NAT ACL 1 permits 10.10.20.0/24, which does not match inside hosts 10.10.10.0/24.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-027",
+    "expected_issue_type": "NAT",
+    "expected_root_cause": "NAT uses a one-address pool without overload, so only one inside host can translate at a time.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-028",
+    "expected_issue_type": "WIRELESS",
+    "expected_root_cause": "Client SSID CampusNET does not match AP SSID CampusNet.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-029",
+    "expected_issue_type": "WIRELESS",
+    "expected_root_cause": "Laptop-W2 PSK cisco123! does not match AP passphrase Cisco123! (case-sensitive).",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": null,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  },
+  {
+    "case_id": "CASE-030",
+    "expected_issue_type": "WIRELESS",
+    "expected_root_cause": "The AP switch port Fa0/12 is in VLAN 1, so wireless clients are not on VLAN 30 where DHCP exists.",
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "A mask was present, but there was not enough documented expected mask information to judge it."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "detected",
+        "evidence": [
+          "Wireless-PC has no usable default gateway (0.0.0.0)."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "not_detected",
+        "evidence": [
+          "Referenced VLANs are present: 30."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "python_correct": false,
+    "ai_issue_type": null,
+    "ai_root_cause": null,
+    "ai_confidence": null,
+    "ai_correct": null,
+    "ai_available": false,
+    "comparison_status": null,
+    "comparison_reason": null,
+    "human_correction": {
+      "reviewed": false,
+      "decision": null,
+      "final_diagnosis": null,
+      "reason": null
+    }
+  }
+]
