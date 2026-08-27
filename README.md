@@ -1,12 +1,13 @@
-# NetSage AI
+﻿# NetSage AI
 
 AI-assisted troubleshooting helper for Cisco Packet Tracer labs.
 
-This repository currently contains **milestones M0–M5** (through the OpenAI diagnosis service).
+NetSage AI combines deterministic Python rule-checking, AI-assisted diagnosis, and mandatory human review to help students and engineers troubleshoot Cisco Packet Tracer lab issues. The system does not diagnose or fix anything autonomously -- every AI diagnosis must be reviewed and accepted, edited, or rejected by a human before it is treated as final.
 
 ## Requirements
 
 - Python 3.x
+- An OpenAI API key (optional for most of the app; required for live AI diagnosis)
 
 ## Setup
 
@@ -17,7 +18,7 @@ pip install -r requirements.txt
 copy .env.example .env
 ```
 
-Set `OPENAI_API_KEY` in `.env` when you are ready to use the API. The key is optional for M0.
+Open `.env` and set `OPENAI_API_KEY` to your real key when you want live AI diagnosis. The app and its Python rule engine work without it; only the AI analysis step requires a configured key.
 
 ## Run
 
@@ -25,30 +26,45 @@ Set `OPENAI_API_KEY` in `.env` when you are ready to use the API. The key is opt
 streamlit run app.py
 ```
 
-Expected startup message:
+The app has two tabs:
 
-```text
-NetSage AI
-System initialized.
-```
+- **Analyze Case** -- enter a symptom, topology notes, and show-command output. The system runs the deterministic Python rules, requests an AI diagnosis (if a key is configured), compares the two, and walks you through mandatory human review (Accept/Edit/Reject) and post-fix verification.
+- **Dashboard** -- shows aggregate statistics (issue types, severity, AI vs. human agreement) computed from every case that has been reviewed and logged so far.
 
-## Data models (M1)
+## How the pipeline works
 
-Pydantic models in `models/` define the core entities: `Case`, `AIDiagnosis`, `PythonFinding`, `ComparisonResult`, `HumanReview`, and `Verification`. They validate allowed issue types, severity, review decisions, comparison states, verification states, and confidence (0–100). Models contain no networking or diagnosis logic.
+Symptom + Topology Notes + Show Output
+        -> Python deterministic rules   (rules/)
+        -> AI diagnosis                 (ai/)
+        -> Structured validation        (ai/validator.py)
+        -> AI vs. Python comparison     (core/comparison.py)
+        -> Mandatory human review       (core/review.py)
+        -> Verification                 (models/verification.py)
+        -> Persisted review log         (core/review_logger.py)
 
-## Dataset (M2)
+## Project structure
 
-Troubleshooting cases live in `data/cases.json` (30 cases covering VLAN, gateway, DHCP, DNS, routing, ACL, NAT, and wireless). `core.dataset_loader.load_cases()` validates every record. `runtime_input()` returns only symptom, topology notes, and show output so expected answers are not sent to the AI.
+| Area | Purpose |
+|---|---|
+| `models/` | Pydantic models for every core entity (`Case`, `AIDiagnosis`, `PythonFinding`, `ComparisonResult`, `HumanReview`, `Verification`). Validation only -- no business logic. |
+| `data/cases.json` | 30 troubleshooting cases covering VLAN, gateway, DHCP, DNS, routing, ACL, NAT, and wireless. |
+| `core/dataset_loader.py` | Loads and validates the case dataset. `runtime_input()` strips expected-answer fields so they are never sent to the AI. |
+| `rules/` | Six independent, deterministic checks: duplicate IP, wrong subnet mask, gateway mismatch, interface down, missing VLAN, missing route. Never calls OpenAI. Reports `insufficient_evidence` rather than guessing when evidence is incomplete. |
+| `ai/` | `DiagnosisService` calls OpenAI and returns raw, unvalidated text. `schema.py`/`validator.py` parse and validate that text into a typed `AIDiagnosis`, rejecting anything malformed before it can reach a human. |
+| `core/comparison.py` | Compares the AI diagnosis against Python findings: `AGREEMENT`, `PARTIAL_AGREEMENT`, `AI_ONLY`, `PYTHON_ONLY`, `CONFLICT`, or `NO_DETERMINISTIC_RESULT`. |
+| `core/review.py` | Enforces the Accept/Edit/Reject workflow. No diagnosis becomes "final" without going through this. |
+| `core/review_logger.py` | Persists every completed review (original AI diagnosis, Python findings, comparison, human decision, verification) to `data/reviews.json`, with atomic writes. |
+| `ui/` | Streamlit display components. Pure display -- all decisions are delegated to `core/`, `ai/`, and `rules/`. |
+| `evaluation/` | Scripts and results for evaluating the system against the full 30-case dataset (see `evaluation/README.md`). |
+| `docs/` | Architecture, demo walkthrough, and Responsible AI documentation. |
 
-## Rule engine (M3)
+## Documentation
 
-`rules.engine.run_rules()` runs six independent checks: duplicate IP, wrong subnet mask, gateway mismatch, interface down, missing VLAN, and missing route. Findings use `detected`, `not_detected`, or `insufficient_evidence`. The engine does not call OpenAI.
-
-## AI diagnosis service (M5)
-
-`ai.diagnosis.DiagnosisService` sends symptom, topology notes, show output, and Python findings to OpenAI. It returns raw text only. Invalid or failed API responses are errors; the service does not invent a fallback diagnosis. Schema validation is not applied yet (M6).
-
-Optional environment variables: `OPENAI_MODEL` (default `gpt-4o-mini`), `OPENAI_TIMEOUT_SECONDS` (default `30`).
+- [`docsARCHITECTURE.md`](docsARCHITECTURE.md) -- system architecture
+- [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) -- the milestone-by-milestone build plan this project followed
+- [`docs/DEMO.md`](docs/DEMO.md) -- a full end-to-end demonstration case
+- [`docs/RESPONSIBLE_AI.md`](docs/RESPONSIBLE_AI.md) -- limitations, hallucination risks, why human review is mandatory, and system boundaries
+- [`evaluation/README.md`](evaluation/README.md) -- how to run and interpret the 30-case evaluation
 
 ## Tests
 
@@ -56,4 +72,9 @@ Optional environment variables: `OPENAI_MODEL` (default `gpt-4o-mini`), `OPENAI_
 pytest
 ```
 
-Do not commit `.env` or API keys.
+All tests run without requiring a live OpenAI API key -- the AI service is mocked throughout the test suite.
+
+## Security
+
+- Never commit `.env` or any real API key. `.gitignore` excludes `.env` by default.
+- `.env.example` documents required environment variables without real values.
