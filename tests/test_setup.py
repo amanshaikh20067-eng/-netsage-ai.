@@ -24,21 +24,20 @@ def test_package_imports() -> None:
 
 
 def test_settings_module_imports() -> None:
-    from config.settings import get_openai_api_key, is_openai_configured
+    from config.settings import get_gemini_api_key, is_gemini_configured
 
-    key = get_openai_api_key()
+    key = get_gemini_api_key()
     assert key is None or isinstance(key, str)
-    assert isinstance(is_openai_configured(), bool)
+    assert isinstance(is_gemini_configured(), bool)
 
 
 def test_no_hardcoded_api_key_in_source() -> None:
     settings_text = (ROOT / "config" / "settings.py").read_text(encoding="utf-8")
     app_text = (ROOT / "app.py").read_text(encoding="utf-8")
     env_example = (ROOT / ".env.example").read_text(encoding="utf-8")
-
-    assert "sk-" not in settings_text
-    assert "sk-" not in app_text
-    assert env_example.strip() == "OPENAI_API_KEY="
+    assert "AIzaSy" not in settings_text
+    assert "AIzaSy" not in app_text
+    assert env_example.strip() == "GEMINI_API_KEY="
 
 
 

@@ -39,7 +39,7 @@ def test_app_starts_and_shows_input_form() -> None:
 
 def test_missing_api_key_shows_error(monkeypatch, tmp_path) -> None:
     monkeypatch.setenv("NETSAGE_REVIEWS_PATH", str(tmp_path / "reviews.json"))
-    monkeypatch.setattr("config.settings.is_openai_configured", lambda: False)
+    monkeypatch.setattr("config.settings.is_gemini_configured", lambda: False)
 
     at = AppTest.from_file(APP_PATH, default_timeout=15)
     at.run()
@@ -55,7 +55,7 @@ def test_missing_api_key_shows_error(monkeypatch, tmp_path) -> None:
 
 def test_full_pipeline_with_mocked_ai(monkeypatch, tmp_path) -> None:
     monkeypatch.setenv("NETSAGE_REVIEWS_PATH", str(tmp_path / "reviews.json"))
-    monkeypatch.setattr("config.settings.is_openai_configured", lambda: True)
+    monkeypatch.setattr("config.settings.is_gemini_configured", lambda: True)
     monkeypatch.setattr(
         "ai.diagnosis.DiagnosisService.request_diagnosis", _fake_request_diagnosis,
     )

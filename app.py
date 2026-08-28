@@ -16,7 +16,7 @@ import streamlit as st
 
 from ai.diagnosis import AIRequestError, DiagnosisService, DiagnosisServiceError, MissingAPIKeyError
 from ai.validator import AIValidationError, validate_ai_response
-from config.settings import is_openai_configured
+from config.settings import is_gemini_configured
 from core.comparison import compare_ai_and_python
 from core.review_logger import ReviewLogger
 from rules.engine import run_rules
@@ -61,9 +61,9 @@ with tab1:
                 case_data["symptom"], case_data["topology_notes"], case_data["show_output"],
             )
 
-        if not is_openai_configured():
+        if not is_gemini_configured():
             st.session_state.ai_error = (
-                "OpenAI API key is not configured. Set OPENAI_API_KEY to run AI analysis."
+                "Gemini API key is not configured. Set GEMINI_API_KEY to run AI analysis."
             )
         else:
             try:
