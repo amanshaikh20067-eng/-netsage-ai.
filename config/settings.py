@@ -27,9 +27,9 @@ def is_gemini_configured() -> bool:
 
 
 def get_gemini_model() -> str:
-    """Return the configured Gemini model name, defaulting to gemini-1.5-flash."""
+    """Return the configured Gemini model name, defaulting to gemini-3.6-flash."""
     value = os.getenv("GEMINI_MODEL")
-    return value.strip() if value and value.strip() else "gemini-1.5-flash"
+    return value.strip() if value and value.strip() else "gemini-3.6-flash"
 
 
 def get_gemini_timeout_seconds() -> float:

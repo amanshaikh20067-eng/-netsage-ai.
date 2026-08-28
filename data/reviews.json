@@ -1,0 +1,170 @@
+[
+  {
+    "review_id": "REV-000001",
+    "case_id": "CASE-59ce5ef1",
+    "ai_diagnosis": {
+      "diagnosis": {
+        "root_cause": "VLAN 20 is missing from the switch configuration, preventing traffic forwarding for PC2.",
+        "issue_type": "VLAN",
+        "osi_layer": "Layer 2",
+        "confidence": 95,
+        "severity": "high"
+      },
+      "evidence": [
+        {
+          "source": "symptom",
+          "observation": "PC2 cannot reach PC1."
+        },
+        {
+          "source": "topology",
+          "observation": "Topology notes indicate PC2 is intended to be on VLAN 20, which does not exist on the switch."
+        },
+        {
+          "source": "show_output",
+          "observation": "'show vlan brief' output demonstrates that only VLAN 1 exists on the switch."
+        }
+      ],
+      "next_command": {
+        "command": "show interfaces switchport",
+        "purpose": "Identify which switch interface connects to PC2 and verify its current VLAN assignment."
+      },
+      "fix_steps": [
+        "Create VLAN 20 on the switch using global configuration mode ('vlan 20').",
+        "Access the switch interface connected to PC2 and assign it to VLAN 20 ('switchport access vlan 20')."
+      ],
+      "uncertainties": [
+        "The specific switch port connecting PC2 is not identified in the provided evidence.",
+        "IP addresses, subnet masks, and default gateways for PC1 and PC2 are unknown."
+      ]
+    },
+    "python_findings": [
+      {
+        "rule_id": "duplicate_ip",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "Fewer than two explicit IP assignments were present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "wrong_subnet_mask",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No subnet mask was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "gateway_mismatch",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No host default gateway was present in the supplied evidence."
+        ]
+      },
+      {
+        "rule_id": "interface_down",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No explicit interface up/down state was present in the supplied output."
+        ]
+      },
+      {
+        "rule_id": "missing_vlan",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No VLAN table evidence (such as show vlan brief) was supplied."
+        ]
+      },
+      {
+        "rule_id": "missing_route",
+        "status": "insufficient_evidence",
+        "evidence": [
+          "No routing table evidence (show ip route) was supplied."
+        ]
+      }
+    ],
+    "comparison": {
+      "status": "NO_DETERMINISTIC_RESULT",
+      "reason": "Python's deterministic rules could not reach a conclusion from the available evidence."
+    },
+    "human_decision": {
+      "review_id": "PENDING",
+      "case_id": "CASE-59ce5ef1",
+      "ai_diagnosis": {
+        "diagnosis": {
+          "root_cause": "VLAN 20 is missing from the switch configuration, preventing traffic forwarding for PC2.",
+          "issue_type": "VLAN",
+          "osi_layer": "Layer 2",
+          "confidence": 95,
+          "severity": "high"
+        },
+        "evidence": [
+          {
+            "source": "symptom",
+            "observation": "PC2 cannot reach PC1."
+          },
+          {
+            "source": "topology",
+            "observation": "Topology notes indicate PC2 is intended to be on VLAN 20, which does not exist on the switch."
+          },
+          {
+            "source": "show_output",
+            "observation": "'show vlan brief' output demonstrates that only VLAN 1 exists on the switch."
+          }
+        ],
+        "next_command": {
+          "command": "show interfaces switchport",
+          "purpose": "Identify which switch interface connects to PC2 and verify its current VLAN assignment."
+        },
+        "fix_steps": [
+          "Create VLAN 20 on the switch using global configuration mode ('vlan 20').",
+          "Access the switch interface connected to PC2 and assign it to VLAN 20 ('switchport access vlan 20')."
+        ],
+        "uncertainties": [
+          "The specific switch port connecting PC2 is not identified in the provided evidence.",
+          "IP addresses, subnet masks, and default gateways for PC1 and PC2 are unknown."
+        ]
+      },
+      "human_decision": "accepted",
+      "human_final_diagnosis": {
+        "diagnosis": {
+          "root_cause": "VLAN 20 is missing from the switch configuration, preventing traffic forwarding for PC2.",
+          "issue_type": "VLAN",
+          "osi_layer": "Layer 2",
+          "confidence": 95,
+          "severity": "high"
+        },
+        "evidence": [
+          {
+            "source": "symptom",
+            "observation": "PC2 cannot reach PC1."
+          },
+          {
+            "source": "topology",
+            "observation": "Topology notes indicate PC2 is intended to be on VLAN 20, which does not exist on the switch."
+          },
+          {
+            "source": "show_output",
+            "observation": "'show vlan brief' output demonstrates that only VLAN 1 exists on the switch."
+          }
+        ],
+        "next_command": {
+          "command": "show interfaces switchport",
+          "purpose": "Identify which switch interface connects to PC2 and verify its current VLAN assignment."
+        },
+        "fix_steps": [
+          "Create VLAN 20 on the switch using global configuration mode ('vlan 20').",
+          "Access the switch interface connected to PC2 and assign it to VLAN 20 ('switchport access vlan 20')."
+        ],
+        "uncertainties": [
+          "The specific switch port connecting PC2 is not identified in the provided evidence.",
+          "IP addresses, subnet masks, and default gateways for PC1 and PC2 are unknown."
+        ]
+      },
+      "review_comment": "AI diagnosis is well-reasoned and matches the stated symptom. Python rules could not confirm due to minimal show-output, but the AI's reasoning from topology notes is sound"
+    },
+    "verification": {
+      "status": "verified",
+      "evidence": ""
+    },
+    "timestamp": "2026-08-28T07:08:29.200413Z"
+  }
+]

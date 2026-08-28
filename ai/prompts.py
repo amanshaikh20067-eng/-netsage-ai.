@@ -23,6 +23,7 @@ Rules:
 - Explicitly identify uncertainty and missing evidence.
 - Recommend one relevant next Packet Tracer/IOS command to validate the diagnosis.
 - Do not apply or approve a network fix. A human must review any diagnosis before it is accepted.
+- confidence must be a whole number from 0 to 100 (e.g. 85), never a decimal fraction like 0.85.
 
 Return JSON only, using this shape:
 {
@@ -30,7 +31,7 @@ Return JSON only, using this shape:
     "root_cause": "string",
     "issue_type": "VLAN|GATEWAY|DHCP|DNS|ROUTING|ACL|NAT|WIRELESS|OTHER",
     "osi_layer": "string",
-    "confidence": 0,
+    "confidence": 85,
     "severity": "low|medium|high"
   },
   "evidence": [
